@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,7 +13,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import { purple } from '@mui/material/colors';
 import {
   ButtonStyled,
   CompanyImage,
@@ -24,27 +23,49 @@ import {
   Welcome,
   Wrapper,
 } from "./style";
-
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme({
-  typography: {
-    fontFamily: ["Lato"].join(","),
-  },
-  // palette: {
-  //   primary: {
-  //     main: purple[500],
-  //   },
-  // },
-});
+import validateEmail from "@/utils/validateEmail";
 
 export default function SignUp() {
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [emailHelperText, setEmailHelperText] = useState("");
+  const [passwordHelperText, setPasswordHelperText] = useState("");
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const email = data.get("email") || "";
+    const password = data.get("password") || "";
+
+    // Reset validation states
+    setEmailError(false);
+    setPasswordError(false);
+    setEmailHelperText("");
+    setPasswordHelperText("");
+
+    let isValid = true;
+
+    if (!validateEmail(email.toString())) {
+      setEmailError(true);
+      setEmailHelperText("Email não encontrado. Confira e tente novamente.");
+      isValid = false;
+    }
+    if (typeof password === "string" && password?.length < 6) {
+      setPasswordError(true);
+      setPasswordHelperText(
+        "Senha incorreta. Por favor, verifique e tente novamente."
+      );
+      isValid = false;
+    }
+
+    if (isValid) {
+      console.log({
+        email,
+        password,
+      });
+      // Proceed with form submission logic...
+    }
   };
 
   return (
@@ -65,6 +86,8 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  error={emailError}
+                  helperText={emailHelperText}
                   required
                   fullWidth
                   id="email"
@@ -75,6 +98,8 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sx={{ mt: 2 }}>
                 <TextField
+                  error={passwordError}
+                  helperText={passwordHelperText}
                   required
                   fullWidth
                   name="password"
