@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Lato } from "next/font/google";
 import "./globals.css";
+import ThemeContext from "@/contexts/ThemeContext";
 
-const inter = Inter({ subsets: ["latin"] });
+const nunito = Lato({ weight: ["400"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <ThemeContext>
+        <body className={nunito.className}>{children}</body>
+      </ThemeContext>
     </html>
   );
 }
