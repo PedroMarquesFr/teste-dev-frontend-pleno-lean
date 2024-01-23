@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
-import ThemeContext from "@/contexts/ThemeContext";
+import ContextHandle from "@/contexts/ContextHandle";
 
 const nunito = Lato({ weight: ["400"], subsets: ["latin"] });
 
@@ -23,9 +23,9 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <ThemeContext>
+      <ContextHandle>
         <body className={nunito.className}>{children}</body>
-      </ThemeContext>
+      </ContextHandle>
     </html>
   );
 }

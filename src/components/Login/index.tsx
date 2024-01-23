@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -22,51 +22,18 @@ import {
   StyledContainer,
   Welcome,
   Wrapper,
-} from "./style";
+} from "./styles";
 import validateEmail from "@/utils/validateEmail";
+import { UserContext } from "@/contexts/UserContext";
 
 export default function SignUp() {
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [emailHelperText, setEmailHelperText] = useState("");
-  const [passwordHelperText, setPasswordHelperText] = useState("");
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    const email = data.get("email") || "";
-    const password = data.get("password") || "";
-
-    // Reset validation states
-    setEmailError(false);
-    setPasswordError(false);
-    setEmailHelperText("");
-    setPasswordHelperText("");
-
-    let isValid = true;
-
-    if (!validateEmail(email.toString())) {
-      setEmailError(true);
-      setEmailHelperText("Email não encontrado. Confira e tente novamente.");
-      isValid = false;
-    }
-    if (typeof password === "string" && password?.length < 6) {
-      setPasswordError(true);
-      setPasswordHelperText(
-        "Senha incorreta. Por favor, verifique e tente novamente."
-      );
-      isValid = false;
-    }
-
-    if (isValid) {
-      console.log({
-        email,
-        password,
-      });
-      // Proceed with form submission logic...
-    }
-  };
+  const {
+    handleSubmit,
+    emailError,
+    passwordError,
+    emailHelperText,
+    passwordHelperText,
+  } = useContext(UserContext);
 
   return (
     <Wrapper>

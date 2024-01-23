@@ -2,6 +2,7 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import React, { createContext, ReactNode } from "react";
+import { UserProvider } from "./UserContext";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme({
@@ -14,9 +15,13 @@ const defaultTheme = createTheme({
   //   },
   // },
 });
-type ThemeContextProps = {
+type ContextHandleProps = {
   children: ReactNode;
 };
-export default function ThemeContext({ children }: ThemeContextProps) {
-  return <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>;
+export default function ContextHandle({ children }: ContextHandleProps) {
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <UserProvider>{children}</UserProvider>
+    </ThemeProvider>
+  );
 }
