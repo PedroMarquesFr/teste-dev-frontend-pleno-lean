@@ -3,8 +3,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import React, { createContext, ReactNode } from "react";
 import { UserProvider } from "./UserContext";
+import { purple } from "@mui/material/colors";
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme({
   typography: {
     fontFamily: ["Lato"].join(","),
@@ -14,6 +14,29 @@ const defaultTheme = createTheme({
   //     main: purple[500],
   //   },
   // },
+  components: {
+    // Name of the component
+    MuiTextField: {
+      // The default props to change
+      defaultProps: {
+        // Set the variant to outlined for all TextFields
+        variant: "outlined",
+      },
+      // The style overrides for the TextField's 'root' slot
+      styleOverrides: {
+        root: {
+          "& .MuiDataGrid-filterForm": {
+            "& .MuiTextField-root": {
+              // Apply outline style
+              "& fieldset": {
+                borderColor: "green", // Example color for the outline
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 });
 type ContextHandleProps = {
   children: ReactNode;
