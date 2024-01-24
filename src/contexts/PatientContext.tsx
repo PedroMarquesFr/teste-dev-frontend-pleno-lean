@@ -148,7 +148,6 @@ const PatientProvider: React.FC<ThemeContextProps> = ({ children }) => {
   const sortPatientsDate = () => {
     const filteredDataCopy = [...filteredData];
     const patientsSorted = filteredDataCopy.sort((a, b) => {
-      // const aFormated = a.registrationDate.split("-");
       
       const dateA = new Date(a.registrationDate).getTime();;
       const dateB = new Date(b.registrationDate).getTime();;
