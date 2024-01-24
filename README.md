@@ -16,7 +16,7 @@ Certifique-se de ter o Node.js instalado.
 2. Clone o repositório com o comando
 
    ```bash
-   https://github.com/PedroMarquesFr/teste-dev-frontend-pleno-lean.git
+   git clone https://github.com/PedroMarquesFr/teste-dev-frontend-pleno-lean.git
    ```
 
 ### Instalando Dependências
@@ -24,7 +24,7 @@ Certifique-se de ter o Node.js instalado.
 Após clonar o repositório, navegue até o diretório do projeto no terminal e instale as dependências executando:
 
 ```bash
-cd seu-repositorio
+cd teste-dev-frontend-pleno-lean
 npm install
 ```
 
