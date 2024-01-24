@@ -4,7 +4,7 @@
 
 ## Descrição
 
-Fiz usando as instruções passadas no notion, juntamente com os design e links dos componentes MUI referenciados no figma. Por mais que o tempo tenha sido apertado, pois tive que dar vazao as tasks da minha empresa atual além de fazer esse test, fiz com muito carinho, espero que gostem ❤️
+Fiz usando as instruções passadas no notion, juntamente com os design e links dos componentes MUI referenciados no figma. Por mais que o tempo tenha sido apertado, pois tive que dar vazao as tasks da minha empresa atual além de fazer esse test, fiz com muito carinho ❤️
 
 ## Instruções de instalação
 
