@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { createContext, ReactNode } from "react";
 import { UserProvider } from "./UserContext";
 import { purple } from "@mui/material/colors";
+import { PatientProvider } from "./PatientContext";
 
 const defaultTheme = createTheme({
   typography: {
@@ -44,7 +45,9 @@ type ContextHandleProps = {
 export default function ContextHandle({ children }: ContextHandleProps) {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <UserProvider>{children}</UserProvider>
+      <UserProvider>
+        <PatientProvider>{children}</PatientProvider>
+      </UserProvider>
     </ThemeProvider>
   );
 }

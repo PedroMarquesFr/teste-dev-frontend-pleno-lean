@@ -17,7 +17,7 @@ import { Logo } from "../Login/styles";
 import { AppBarStyled } from "./styles";
 
 const pages = ["Clientes", "Endereços", "Entregas"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Logout"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
