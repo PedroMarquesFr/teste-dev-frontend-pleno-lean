@@ -1,4 +1,6 @@
 # Avaliação React para Desenvolvedor Front-End - Pleno
+![image](https://github.com/PedroMarquesFr/teste-dev-frontend-pleno-lean/assets/43834071/cd71c078-915f-46d8-ad0a-565fb1d816f7)
+![image](https://github.com/PedroMarquesFr/teste-dev-frontend-pleno-lean/assets/43834071/b781ad9b-4fb7-4fbf-89dc-1bca73e2c56e)
 
 ## Descrição
 
