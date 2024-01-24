@@ -2,8 +2,6 @@ import validateEmail from "@/utils/validateEmail";
 import React, { createContext, useState, useContext, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import { ToastContainer,toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 const USER_MOCK = {
   email: "admin@gmail.com",
   password: "admin1",
@@ -76,7 +74,7 @@ const UserProvider: React.FC<ThemeContextProps> = ({ children }) => {
         "fakeToken",
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
       );
-      toast.success("Logado com sucesso!");
+      // toast.success("Logado com sucesso!");
       router.push("/patients");
     }
   };
@@ -91,7 +89,6 @@ const UserProvider: React.FC<ThemeContextProps> = ({ children }) => {
         handleSubmit,
       }}
     >
-      <ToastContainer/>
       {children}
     </UserContext.Provider>
   );
