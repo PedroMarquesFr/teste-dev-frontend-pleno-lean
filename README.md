@@ -43,5 +43,5 @@ Após executar este comando, a aplicação estará disponível em `http://localh
 Os dados do usuário de login são:
 
 ```bash
-Email:admin@gmail.com|Password:1234567
+Email:admin@gmail.com|Password:admin1
 ```

@@ -1,6 +1,6 @@
 "use client";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import 'react-toastify/dist/ReactToastify.css';
 import React, { createContext, ReactNode } from "react";
 import { UserProvider } from "./UserContext";
 import { purple } from "@mui/material/colors";
@@ -16,21 +16,16 @@ const defaultTheme = createTheme({
   //   },
   // },
   components: {
-    // Name of the component
     MuiTextField: {
-      // The default props to change
       defaultProps: {
-        // Set the variant to outlined for all TextFields
         variant: "outlined",
       },
-      // The style overrides for the TextField's 'root' slot
       styleOverrides: {
         root: {
           "& .MuiDataGrid-filterForm": {
             "& .MuiTextField-root": {
-              // Apply outline style
               "& fieldset": {
-                borderColor: "green", // Example color for the outline
+                borderColor: "green",
               },
             },
           },
