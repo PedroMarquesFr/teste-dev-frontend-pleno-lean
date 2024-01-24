@@ -52,7 +52,6 @@ export const Title = styled.h3`
   color: var(--Foundation-CInza-cinza-900, #515151);
   font-feature-settings: "clig" off, "liga" off;
   /* typography/h5 */
-  font-family: Roboto;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
