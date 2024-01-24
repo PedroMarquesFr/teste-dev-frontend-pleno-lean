@@ -54,6 +54,7 @@ export const Logo = styled.h3`
   line-height: 24px; /* 120% */
   letter-spacing: 0.4px;
   margin: unset;
+  margin-right: 20px;
 `;
 
 export const CompanyImage = styled.div`

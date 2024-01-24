@@ -14,7 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Logo } from "../Login/styles";
-import { AppBarStyled } from "./styles";
+import { AppBarStyled, ButtonPageLink } from "./styles";
 
 const pages = ["Clientes", "Endereços", "Entregas"];
 const settings = ["Logout"];
@@ -109,15 +109,25 @@ function ResponsiveAppBar() {
             <Logo>LOGO</Logo>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            <ButtonPageLink
+              onClick={handleCloseNavMenu}
+              sx={{ my: 0, display: "block", py:2.4 }}
+              $primary
+            >
+              Clientes
+            </ButtonPageLink>
+            <ButtonPageLink
+              onClick={handleCloseNavMenu}
+              sx={{ my: 0, display: "block", py:2 }}
+            >
+              Endereços
+            </ButtonPageLink>
+            <ButtonPageLink
+              onClick={handleCloseNavMenu}
+              sx={{ my: 0, display: "block", py:2 }}
+            >
+              Entregas
+            </ButtonPageLink>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

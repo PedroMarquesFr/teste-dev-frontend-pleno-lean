@@ -21,6 +21,7 @@ import { Input, TextField, Theme } from "@mui/material";
 import StatusCell from "./StatusCell";
 import ActionButton from "./ActionButton";
 import { PatientContext } from "@/contexts/PatientContext";
+import { format } from "date-fns";
 
 function CustomToolbar() {
   const { findPatientsBySearchTerm } = useContext(PatientContext);
@@ -57,7 +58,19 @@ export default function DataGridPremiumDemo() {
     { field: "id", headerName: "ID", flex: 1 },
     { field: "name", headerName: "Name", flex: 1 },
     { field: "phone", headerName: "Phone", flex: 1 },
-    { field: "registrationDate", headerName: "Registration Date", flex: 1 },
+    {
+      field: "registrationDate",
+      headerName: "Registration Date",
+      renderCell: (params: { formattedValue: string }) => {
+        const dateArray = params.formattedValue.split("-");
+        const formattedDate = format(
+          new Date(`${dateArray[1]}-${dateArray[0]}-${dateArray[2]}`),
+          "dd/MM/yyyy"
+        );
+        return <div>{formattedDate}</div>;
+      },
+      flex: 1,
+    },
     {
       field: "status",
       headerName: "Status",
@@ -69,9 +82,10 @@ export default function DataGridPremiumDemo() {
     {
       field: "action",
       headerName: "",
-      renderCell: (params: { formattedValue: "Ativo" | "Inativo" }) => (
-        <ActionButton />
-      ),
+      renderCell: (params: { row: { id: number } }) => {
+        console.log(":P", params);
+        return <ActionButton rowId={params.row.id} />;
+      },
       width: 30,
     },
   ];
@@ -81,7 +95,6 @@ export default function DataGridPremiumDemo() {
       <Title>Usuários</Title>
       <DataGridPremiumStyled
         getRowClassName={(params) => {
-          console.log("XD", params);
           return `super-app-theme--${params.row.status}`;
         }}
         slotProps={{

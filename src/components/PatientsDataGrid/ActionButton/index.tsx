@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   IconButton,
@@ -6,13 +7,19 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import BlockIcon from "@mui/icons-material/Block";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { MenuItemActivate, MenuItemDeactivate, MenuTitle } from "../styles";
+import { PatientContext } from "@/contexts/PatientContext";
 
-const ActionButton: React.FC = () => {
+interface ActionButtonProps {
+  rowId: number;
+}
+
+const ActionButton: React.FC<ActionButtonProps> = (props) => {
+  const { changePatientStatus } = useContext(PatientContext);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -46,11 +53,21 @@ const ActionButton: React.FC = () => {
         onClose={handleCloseUserMenu}
       >
         <MenuTitle>Mudar status</MenuTitle>
-        <MenuItemActivate onClick={handleCloseUserMenu}>
+        <MenuItemActivate
+          onClick={() => {
+            handleCloseUserMenu();
+            changePatientStatus(props.rowId, "Ativo");
+          }}
+        >
           <CheckCircleOutlineIcon sx={{ marginRight: 1 }} />
           Ativar
         </MenuItemActivate>
-        <MenuItemDeactivate onClick={handleCloseUserMenu}>
+        <MenuItemDeactivate
+          onClick={() => {
+            handleCloseUserMenu();
+            changePatientStatus(props.rowId, "Inativo");
+          }}
+        >
           <BlockIcon sx={{ marginRight: 1 }} />
           Inativar
         </MenuItemDeactivate>

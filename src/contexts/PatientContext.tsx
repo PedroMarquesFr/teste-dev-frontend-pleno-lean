@@ -14,6 +14,10 @@ interface PatientContextType {
   getPatients: () => void;
   isLoading: boolean;
   findPatientsBySearchTerm: (searchTerm: string) => void;
+  changePatientStatus: (
+    patientId: number,
+    newStatus: "Ativo" | "Inativo"
+  ) => void;
 }
 
 const PatientContext = createContext<PatientContextType>({
@@ -22,6 +26,7 @@ const PatientContext = createContext<PatientContextType>({
   getPatients: () => {},
   isLoading: false,
   findPatientsBySearchTerm: (searchTerm: string) => {},
+  changePatientStatus: (patientId, newStatus) => {},
 });
 
 type ThemeContextProps = {
@@ -38,6 +43,7 @@ const PatientProvider: React.FC<ThemeContextProps> = ({ children }) => {
     setFilteredData(patients);
     setIsLoading(false);
   };
+
   const findPatientsBySearchTerm = (searchTerm: string) => {
     const filteredItems = data.filter((patient) => {
       if (
@@ -53,6 +59,22 @@ const PatientProvider: React.FC<ThemeContextProps> = ({ children }) => {
     });
     setFilteredData(filteredItems);
   };
+
+  const changePatientStatus = (
+    patientId: number,
+    newStatus: "Ativo" | "Inativo"
+  ) => {
+    const changedStatusTemporary = filteredData.map((user) => {
+      if (user.id === patientId) {
+        return {
+          ...user,
+          status: newStatus,
+        };
+      }
+      return user;
+    });
+    setFilteredData(changedStatusTemporary);
+  };
   return (
     <PatientContext.Provider
       value={{
@@ -61,6 +83,7 @@ const PatientProvider: React.FC<ThemeContextProps> = ({ children }) => {
         getPatients,
         isLoading,
         findPatientsBySearchTerm,
+        changePatientStatus,
       }}
     >
       {children}
