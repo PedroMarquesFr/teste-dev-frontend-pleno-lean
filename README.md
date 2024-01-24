@@ -35,5 +35,8 @@ Com as dependências instaladas, você pode iniciar o servidor de desenvolviment
 ```bash
 npm run dev
 ```
-
 Após executar este comando, a aplicação estará disponível em `http://localhost:3000` no seu navegador.
+### Dados de login
+O usuário de login é:
+Email:admin@gmail.com
+Password: 1234567
