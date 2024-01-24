@@ -17,27 +17,12 @@ import {
   TextFieldSearch,
   Title,
 } from "./styles";
-import { Input, TextField, Theme } from "@mui/material";
+import { Button, Input, TextField, Theme } from "@mui/material";
 import StatusCell from "./StatusCell";
 import ActionButton from "./ActionButton";
 import { PatientContext } from "@/contexts/PatientContext";
 import { format } from "date-fns";
-
-function CustomToolbar() {
-  const { findPatientsBySearchTerm } = useContext(PatientContext);
-  return (
-    <GridToolbarContainer>
-      <TextFieldSearch
-        id="outlined-basic"
-        label="Pesquisar ID ou nome ou telefone..."
-        onChange={(e) => {
-          findPatientsBySearchTerm(e.target.value);
-        }}
-      />
-      <GridToolbarFilterButtonStyled />
-    </GridToolbarContainer>
-  );
-}
+import CustomToolbar from "./CustomToolBar";
 
 export default function DataGridPremiumDemo() {
   const { filteredData, getPatients, isLoading, findPatientsBySearchTerm } =
@@ -83,7 +68,6 @@ export default function DataGridPremiumDemo() {
       field: "action",
       headerName: "",
       renderCell: (params: { row: { id: number } }) => {
-        console.log(":P", params);
         return <ActionButton rowId={params.row.id} />;
       },
       width: 30,

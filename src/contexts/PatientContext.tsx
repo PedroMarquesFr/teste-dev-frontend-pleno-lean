@@ -18,6 +18,11 @@ interface PatientContextType {
     patientId: number,
     newStatus: "Ativo" | "Inativo"
   ) => void;
+  sortPatientsById: () => void;
+  sortPatientsByName: () => void;
+  sortPatientsPhone: () => void;
+  sortPatientsByStatus: () => void;
+  sortPatientsDate: () => void;
 }
 
 const PatientContext = createContext<PatientContextType>({
@@ -27,6 +32,11 @@ const PatientContext = createContext<PatientContextType>({
   isLoading: false,
   findPatientsBySearchTerm: (searchTerm: string) => {},
   changePatientStatus: (patientId, newStatus) => {},
+  sortPatientsById: () => {},
+  sortPatientsByName: () => {},
+  sortPatientsPhone: () => {},
+  sortPatientsByStatus: () => {},
+  sortPatientsDate: () => {},
 });
 
 type ThemeContextProps = {
@@ -45,13 +55,14 @@ const PatientProvider: React.FC<ThemeContextProps> = ({ children }) => {
   };
 
   const findPatientsBySearchTerm = (searchTerm: string) => {
+    const searchTermLowCase = searchTerm.toLowerCase();
     const filteredItems = data.filter((patient) => {
       if (
-        patient.name.includes(searchTerm) ||
-        patient.phone.includes(searchTerm) ||
-        patient.registrationDate.includes(searchTerm) ||
-        patient.status.includes(searchTerm) ||
-        patient.id.toString().includes(searchTerm)
+        patient.name.toLowerCase().includes(searchTermLowCase) ||
+        patient.phone.toLowerCase().includes(searchTermLowCase) ||
+        patient.registrationDate.toLowerCase().includes(searchTermLowCase) ||
+        patient.status.toLowerCase().includes(searchTermLowCase) ||
+        patient.id.toString().includes(searchTermLowCase)
       ) {
         return true;
       }
@@ -75,6 +86,76 @@ const PatientProvider: React.FC<ThemeContextProps> = ({ children }) => {
     });
     setFilteredData(changedStatusTemporary);
   };
+
+  const sortPatientsById = () => {
+    const filteredDataCOpy = [...filteredData];
+    const patientsSorted = filteredDataCOpy.sort(
+      (first, second) => first.id - second.id
+    );
+    setFilteredData(patientsSorted);
+  };
+
+  const sortPatientsByName = () => {
+    const filteredDataCOpy = [...filteredData];
+    const patientsSorted = filteredDataCOpy.sort((a, b) => {
+      let nameA = a.name.toLowerCase();
+      let nameB = b.name.toLowerCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    setFilteredData(patientsSorted);
+  };
+
+  const sortPatientsByStatus = () => {
+    const filteredDataCopy = [...filteredData];
+    const patientsSorted = filteredDataCopy.sort((a, b) => {
+      let statusA = a.status.toLowerCase();
+      let statusB = b.status.toLowerCase();
+
+      if (statusA < statusB) {
+        return -1;
+      }
+      if (statusA > statusB) {
+        return 1;
+      }
+      return 0;
+    });
+    setFilteredData(patientsSorted);
+  };
+  const sortPatientsPhone = () => {
+    const filteredDataCopy = [...filteredData];
+    const patientsSorted = filteredDataCopy.sort((a, b) => {
+      let phoneA = a.phone.toLowerCase();
+      let phoneB = b.phone.toLowerCase();
+
+      if (phoneA < phoneB) {
+        return -1;
+      }
+      if (phoneA > phoneB) {
+        return 1;
+      }
+      return 0;
+    });
+    setFilteredData(patientsSorted);
+  };
+
+  const sortPatientsDate = () => {
+    const filteredDataCopy = [...filteredData];
+    const patientsSorted = filteredDataCopy.sort((a, b) => {
+      // const aFormated = a.registrationDate.split("-");
+      
+      const dateA = new Date(a.registrationDate).getTime();;
+      const dateB = new Date(b.registrationDate).getTime();;
+      return dateA - dateB;
+  });
+    setFilteredData(patientsSorted);
+  };
   return (
     <PatientContext.Provider
       value={{
@@ -84,6 +165,11 @@ const PatientProvider: React.FC<ThemeContextProps> = ({ children }) => {
         isLoading,
         findPatientsBySearchTerm,
         changePatientStatus,
+        sortPatientsById,
+        sortPatientsByName,
+        sortPatientsPhone,
+        sortPatientsByStatus,
+        sortPatientsDate
       }}
     >
       {children}

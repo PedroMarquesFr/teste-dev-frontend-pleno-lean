@@ -8,7 +8,7 @@ import {
   useGridApiRef,
   useKeepGroupedColumnsHidden,
 } from "@mui/x-data-grid-premium";
-import { MenuItem, TextField } from "@mui/material";
+import { Button, Menu, MenuItem, TextField } from "@mui/material";
 export const DataGridPremiumStyled = styled(DataGridPremium)`
   border: unset;
   height: 66vh;
@@ -126,4 +126,17 @@ export const MenuItemDeactivate = styled(MenuItem)`
   font-weight: 400;
   line-height: 150%; /* 24px */
   letter-spacing: 0.15px;
+`;
+
+export const OrderByButton = styled(Button)`
+  text-transform: none;
+  color: #9747ff;
+
+  font-family: Lato;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: 0.4px;
+  margin-left: 10px;
 `;
